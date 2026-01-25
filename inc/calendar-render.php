@@ -73,13 +73,42 @@ $posts = $query->posts;
       $day = date('Y-m-d', strtotime("+$i day", $w));
       echo '<td><div class="ssc-date">' . date('j', strtotime($day)) . '</div>';
       if (!empty($map[$day])) {
-        foreach ($map[$day] as $p) {
-          echo '<div class="ssc-item">' . esc_html($p->post_title) . '</div>';
-        }
+foreach ($map[$day] as $p) {
+
+  $body = get_post_meta($p->ID, 'ssc_body', true);
+  $edit_link = get_edit_post_link($p->ID);
+
+  echo '<div class="ssc-item"
+    data-title="' . esc_attr($p->post_title) . '"
+    data-body="' . esc_attr(wpautop($body)) . '"
+    data-edit="' . esc_url($edit_link) . '"
+  >';
+
+  echo esc_html($p->post_title);
+  echo '</div>';
+}
       }
       echo '</td>';
     }
     echo '</tr>';
   }
   echo '</table>';
+   
+?>
+<div id="ssc-modal" class="ssc-modal">
+  <div class="ssc-modal-bg"></div>
+  <div class="ssc-modal-box">
+    <button class="ssc-modal-close">×</button>
+    <h3 id="ssc-modal-title"></h3>
+    <div id="ssc-modal-body"></div>
+    <?php if (is_user_logged_in()) : ?>
+      <p class="ssc-edit-link">
+        <a href="#" target="_blank">この予定を編集</a>
+      </p>
+    <?php endif; ?>
+  </div>
+</div>
+<?php
+   
 }
+

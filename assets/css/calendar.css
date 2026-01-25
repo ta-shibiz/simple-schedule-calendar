@@ -25,10 +25,48 @@ body .ssc-calendar td {
   margin-top: 2px;
   border-radius: 3px;
 }
+.ssc-item:hover {
+   cursor: pointer;
+
+}
 
 .sc-month-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+}
+
+
+/*本文（ssc_body）モーダル表示*/.ssc-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+.ssc-modal.show {
+  display: block;
+}
+.ssc-modal-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+}
+.ssc-modal-box {
+  position: relative;
+  background: #fff;
+  max-width: 600px;
+  margin: 10vh auto;
+  padding: 20px;
+}
+.ssc-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+   width: 2rem;
+   height: 2rem;
+   font-size: 2rem;
+}
+#ssc-modal h3{
+   margin: 0;
 }

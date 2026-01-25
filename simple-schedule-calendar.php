@@ -25,4 +25,11 @@ add_action('wp_enqueue_scripts', function () {
     [],
     '1.0.0'
   );
+  wp_enqueue_script(
+    'ssc-modal',
+    SSC_URL . 'assets/js/ssc-modal.js',
+    [],
+    '1.0.0',
+    true
+  );
 });
