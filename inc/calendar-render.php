@@ -1,6 +1,6 @@
 <?php
 
-function ssc_render_calendar($year, $month) {
+function ssc_render_calendar($year, $month, $categories = [], $fields = []) {
 
   $current = strtotime("$year-$month-01");
   $prev = date('Y-m', strtotime('-1 month', $current));
@@ -19,22 +19,44 @@ function ssc_render_calendar($year, $month) {
   $start = strtotime('last monday', $first);
   $end   = strtotime('next sunday', strtotime('last day of', $first));
 
-  $posts = get_posts([
-    'post_type' => 'schedule',
-    'numberposts' => -1,
-    'meta_key' => 'ssc_date',
-    'meta_query' => [
-      [
-        'key' => 'ssc_date',
-        'value' => [
-          date('Y-m-d', $start),
-          date('Y-m-d', $end)
-        ],
-        'compare' => 'BETWEEN',
-        'type' => 'DATE'
-      ]
-    ]
-  ]);
+   $query_args = [
+  'post_type'      => 'schedule',
+  'posts_per_page' => -1,
+  'meta_query'     => [
+    [
+      'key'     => 'ssc_date',
+      'value'   => [
+        date('Y-m-01', strtotime("$year-$month-01")),
+        date('Y-m-t',  strtotime("$year-$month-01")),
+      ],
+      'compare' => 'BETWEEN',
+      'type'    => 'DATE',
+    ],
+  ],
+];
+
+if (!empty($fields)) {
+  $query_args['meta_query'][] = [
+    'key'     => 'ssc_field',
+    'value'   => $fields,
+    'compare' => 'IN',
+  ];
+}
+
+if (!empty($categories)) {
+  $query_args['tax_query'] = [
+    [
+      'taxonomy' => 'ssc_category',
+      'field'    => 'slug',
+      'terms'    => $categories,
+    ],
+  ];
+}
+
+// ★★★ これが必要 ★★★
+$query = new WP_Query($query_args);
+$posts = $query->posts;
+
 
   $map = [];
   foreach ($posts as $p) {

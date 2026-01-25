@@ -1,13 +1,15 @@
 .ssc-calendar {
   width: 100%;
   border-collapse: collapse;
+   line-height: 1.4;
 }
 
-.ssc-calendar th,
-.ssc-calendar td {
+body .ssc-calendar th,
+body .ssc-calendar td {
   border: 1px solid #ccc;
   vertical-align: top;
   padding: 4px;
+   width: calc( 100% / 7);
 }
 
 .ssc-date {
@@ -18,8 +20,15 @@
 .ssc-item {
   background: #444;
   color: #fff;
-  font-size: 11px;
-  padding: 2px 4px;
+  font-size: clamp(0.688rem, 0.54rem + 0.74vw, 1rem);
+  padding: 0.4em 0.2em;
   margin-top: 2px;
   border-radius: 3px;
+}
+
+.sc-month-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
