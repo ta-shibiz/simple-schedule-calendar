@@ -1,0 +1,63 @@
+<?php
+
+function ssc_render_calendar($year, $month) {
+
+  $current = strtotime("$year-$month-01");
+  $prev = date('Y-m', strtotime('-1 month', $current));
+  $next = date('Y-m', strtotime('+1 month', $current));
+
+  echo '<div class="ssc-month-nav">';
+  echo '<a href="?sc_month=' . esc_attr($prev) . '">← 前月</a>';
+  echo '<span>' . esc_html($year . '年' . $month . '月') . '</span>';
+  echo '<a href="?sc_month=' . esc_attr($next) . '">次月 →</a>';
+  echo '</div>';
+
+  // ↓↓↓ ここから下は【あなたの既存コードを一切変更しない】 ↓↓↓
+
+
+  $first = strtotime("$year-$month-01");
+  $start = strtotime('last monday', $first);
+  $end   = strtotime('next sunday', strtotime('last day of', $first));
+
+  $posts = get_posts([
+    'post_type' => 'schedule',
+    'numberposts' => -1,
+    'meta_key' => 'ssc_date',
+    'meta_query' => [
+      [
+        'key' => 'ssc_date',
+        'value' => [
+          date('Y-m-d', $start),
+          date('Y-m-d', $end)
+        ],
+        'compare' => 'BETWEEN',
+        'type' => 'DATE'
+      ]
+    ]
+  ]);
+
+  $map = [];
+  foreach ($posts as $p) {
+    $d = get_post_meta($p->ID, 'ssc_date', true);
+    $map[$d][] = $p;
+  }
+
+  echo '<table class="ssc-calendar">';
+  echo '<tr><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th><th>日</th></tr>';
+
+  for ($w = $start; $w <= $end; $w = strtotime('+1 week', $w)) {
+    echo '<tr>';
+    for ($i = 0; $i < 7; $i++) {
+      $day = date('Y-m-d', strtotime("+$i day", $w));
+      echo '<td><div class="ssc-date">' . date('j', strtotime($day)) . '</div>';
+      if (!empty($map[$day])) {
+        foreach ($map[$day] as $p) {
+          echo '<div class="ssc-item">' . esc_html($p->post_title) . '</div>';
+        }
+      }
+      echo '</td>';
+    }
+    echo '</tr>';
+  }
+  echo '</table>';
+}

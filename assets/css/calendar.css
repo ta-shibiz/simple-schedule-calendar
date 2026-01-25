@@ -1,0 +1,25 @@
+.ssc-calendar {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ssc-calendar th,
+.ssc-calendar td {
+  border: 1px solid #ccc;
+  vertical-align: top;
+  padding: 4px;
+}
+
+.ssc-date {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.ssc-item {
+  background: #444;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 4px;
+  margin-top: 2px;
+  border-radius: 3px;
+}
