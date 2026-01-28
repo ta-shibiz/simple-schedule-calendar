@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="post-type.php" server="162.43.101.193" local="134137509578800337" remote="134137509000000000" Dst="0" />
-<file name="category-meta.php" server="162.43.101.193" local="134137435416753865" remote="134137435200000000" Dst="0" />
-<file name="calendar-render.php" server="162.43.101.193" local="134138029777636430" remote="134138029200000000" Dst="0" />
+<file name="post-type.php" server="162.43.101.193" local="134138767236111913" remote="134138767200000000" Dst="0" />
+<file name="category-meta.php" server="162.43.101.193" local="134140440222633986" remote="134140440000000000" Dst="0" />
+<file name="calendar-render.php" server="162.43.101.193" local="134140714820227119" remote="134140714800000000" Dst="0" />
 <file name="post-type.php" server="150.60.159.50" local="134137507345971827" remote="134137507200000000" Dst="0" />
-<file name="save-meta.php" server="162.43.101.193" local="134137834046330541" remote="134137833600000000" Dst="0" />
-<file name="settings-page.php" server="162.43.101.193" local="134137422000000000" remote="134137422000000000" Dst="0" />
-<file name="meta-boxes.php" server="162.43.101.193" local="134137833398316728" remote="134137833000000000" Dst="0" />
-<file name="shortcode.php" server="162.43.101.193" local="134137964995659636" remote="134137964400000000" Dst="0" />
+<file name="settings-page.php" server="162.43.101.193" local="134138767236131915" remote="134138767200000000" Dst="0" />
+<file name="meta-boxes.php" server="162.43.101.193" local="134138767200000000" remote="134138767200000000" Dst="0" />
+<file name="shortcode.php" server="162.43.101.193" local="134138767236131915" remote="134138767200000000" Dst="0" />
+<file name="admin-columns.php" server="162.43.101.193" local="134140425580483902" remote="134140425000000000" Dst="0" />
 </dwsync>

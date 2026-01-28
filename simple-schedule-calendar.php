@@ -17,6 +17,8 @@ require_once SSC_PATH . 'inc/save-meta.php';
 require_once SSC_PATH . 'inc/settings-page.php';
 require_once SSC_PATH . 'inc/calendar-render.php';
 require_once SSC_PATH . 'inc/shortcode.php';
+require_once SSC_PATH . 'inc/category-meta.php';
+require_once SSC_PATH . 'inc/admin-columns.php';
 
 add_action('wp_enqueue_scripts', function () {
   wp_enqueue_style(

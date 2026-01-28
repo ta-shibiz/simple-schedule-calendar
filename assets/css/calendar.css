@@ -4,12 +4,46 @@
    line-height: 1.4;
 }
 
+.ssc-month-nav{
+    text-align-last: center;
+}
+.ssc-month-nav a{
+    display: inline-block;
+    background: #999;
+    color: #fff;
+    text-decoration: none !important;
+    padding: 0.3rem 1rem;
+    border-radius: 3px;
+}
+.ssc-month-nav a:hover{
+    color: #fff;
+    opacity: 0.7;
+}
+
+.ssc-month-nav span{
+    display: inline-block;
+    padding: 0 1rem;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
 body .ssc-calendar th,
 body .ssc-calendar td {
   border: 1px solid #ccc;
   vertical-align: top;
-  padding: 4px;
-   width: calc( 100% / 7);
+  width: calc( 100% / 7);
+}
+body .ssc-calendar th,
+body .ssc-calendar td > div{
+    padding:clamp(0.063rem, -0.055rem + 0.59vw, 0.313rem);
+}
+body .ssc-calendar th{
+    background: rgba(227,227,227,1.00);
+    text-align: center;
+}
+body .ssc-calendar td{
+    padding: 0;
+    background: #fff;
 }
 
 .ssc-date {
@@ -18,12 +52,8 @@ body .ssc-calendar td {
 }
 
 .ssc-item {
-  background: #444;
-  color: #fff;
   font-size: clamp(0.688rem, 0.54rem + 0.74vw, 1rem);
-  padding: 0.4em 0.2em;
   margin-top: 2px;
-  border-radius: 3px;
 }
 .ssc-item:hover {
    cursor: pointer;
@@ -46,6 +76,7 @@ body .ssc-calendar td {
 }
 .ssc-modal.show {
   display: block;
+  padding: 1rem;
 }
 .ssc-modal-bg {
   position: absolute;
