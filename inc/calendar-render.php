@@ -16,7 +16,7 @@ function ssc_render_calendar( $year, $month, $categories = [], $fields = [] ) {
 
 
     $first = strtotime( "$year-$month-01" );
-    $start = strtotime( 'last monday', $first );
+    $start = strtotime( 'last sunday', $first );
     $end = strtotime( 'next sunday', strtotime( 'last day of', $first ) );
 
     $query_args = [
@@ -71,7 +71,7 @@ function ssc_render_calendar( $year, $month, $categories = [], $fields = [] ) {
 
 
     echo '<table class="ssc-calendar">';
-    echo '<tr><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th><th>日</th></tr>';
+    echo '<tr><th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th></tr>';
 
     for ( $w = $start; $w <= $end; $w = strtotime( '+1 week', $w ) ) {
         echo '<tr>';
