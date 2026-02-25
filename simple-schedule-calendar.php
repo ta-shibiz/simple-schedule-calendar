@@ -23,13 +23,13 @@ require_once SSC_PATH . 'inc/admin-columns.php';
 add_action('wp_enqueue_scripts', function () {
   wp_enqueue_style(
     'ssc-calendar',
-    SSC_URL . 'assets/css/calendar.css',
+    SSC_URL . 'assets/css/calendar.css?20260128001',
     [],
     '1.0.0'
   );
   wp_enqueue_script(
     'ssc-modal',
-    SSC_URL . 'assets/js/ssc-modal.js',
+    SSC_URL . 'assets/js/ssc-modal.js?20260128',
     [],
     '1.0.0',
     true
