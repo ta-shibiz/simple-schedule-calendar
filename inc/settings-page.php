@@ -16,26 +16,43 @@ add_action('admin_init', function () {
 
 function ssc_default_fields() {
   return [
-    'hs_yellow_half' => [
-      'label' => 'ヘッドショット・イエローフィールド（片面）',
+      
+    'base_ub' => [
+      'label' => 'BASE（全面）',
       'order' => 10,
       'enabled' => true,
     ],
-    'hs_red_half' => [
-      'label' => 'ヘッドショット・レッドフィールド（片面）',
+    'base_u' => [
+      'label' => 'BASE Uフィールド（片面）',
       'order' => 20,
       'enabled' => true,
     ],
-    'hs_full' => [
-      'label' => 'ヘッドショット全面',
+    'base_b' => [
+      'label' => 'BASE Bフィールド（片面）',
       'order' => 30,
       'enabled' => true,
     ],
-    'little' => [
-      'label' => 'リトルヘッドショット',
+    'met_lr' => [
+      'label' => 'MET（全面）',
       'order' => 40,
       'enabled' => true,
     ],
+    'met_l' => [
+      'label' => 'MET Lフィールド（片面）',
+      'order' => 50,
+      'enabled' => true,
+    ],
+    'met_r' => [
+      'label' => 'MET Rフィールド（片面）',
+      'order' => 50,
+      'enabled' => true,
+    ],
+    'base_met' => [
+      'label' => 'BASE×MET',
+      'order' => 60,
+      'enabled' => true,
+    ],
+
   ];
 }
 

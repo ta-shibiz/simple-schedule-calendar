@@ -43,17 +43,26 @@ $saved_field = get_post_meta($post->ID, 'ssc_field', true);
 ?>
 <select name="ssc_field">
 <option value="">選択してください</option>
-  <option value="hs_yellow_half" <?php selected($saved_field, 'hs_yellow_half'); ?>>
-    HS イエロー（片面）
+  <option value="base_ub" <?php selected($saved_field, 'base_ub'); ?>>
+    BASE（全面）
   </option>
-  <option value="hs_red_half" <?php selected($saved_field, 'hs_red_half'); ?>>
-    HS レッド（片面）
+  <option value="base_u" <?php selected($saved_field, 'base_u'); ?>>
+    BASE Uフィールド（片面）
   </option>
-  <option value="hs_full" <?php selected($saved_field, 'hs_full'); ?>>
-    HS 全面
+  <option value="base_b" <?php selected($saved_field, 'base_b'); ?>>
+    BASE Bフィールド（片面）
   </option>
-  <option value="little" <?php selected($saved_field, 'little'); ?>>
-    リトルヘッドショット
+  <option value="met_lr" <?php selected($saved_field, 'met_lr'); ?>>
+    MET（全面）
+  </option>
+  <option value="met_l" <?php selected($saved_field, 'met_l'); ?>>
+    MET Lフィールド（片面）
+  </option>
+  <option value="met_r" <?php selected($saved_field, 'met_r'); ?>>
+    MET Rフィールド（片面）
+  </option>
+  <option value="base_met" <?php selected($saved_field, 'base_met'); ?>>
+    BASE×MET
   </option>
 </select>
   </p>

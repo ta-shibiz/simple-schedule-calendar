@@ -12,27 +12,29 @@ function ssc_render_calendar( $year, $month, $categories = [], $fields = [] ) {
     echo '<a href="?sc_month=' . esc_attr( $next ) . '#calendar">次月</a>';
     echo '</div>';
 
-    // ↓↓↓ ここから下は【あなたの既存コードを一切変更しない】 ↓↓↓
 
-
-    $first = strtotime( "$year-$month-01" );
-    $start = strtotime( 'last sunday', $first );
-    $end = strtotime( 'next sunday', strtotime( 'last day of', $first ) );
+$first = strtotime("$year-$month-01");
+/* 週の開始 */
+$start = strtotime('last sunday', $first);
+/* 月末 */
+$last = strtotime(date('Y-m-t', $first));
+/* 週の終了 */
+$end = strtotime('next saturday', $last);
 
     $query_args = [
-        'post_type' => 'schedule',
-        'posts_per_page' => -1,
-        'meta_query' => [
-            [
-                'key' => 'ssc_date',
-                'value' => [
-                    date( 'Y-m-01', strtotime( "$year-$month-01" ) ),
-                    date( 'Y-m-t', strtotime( "$year-$month-01" ) ),
-                ],
-                'compare' => 'BETWEEN',
-                'type' => 'DATE',
+    'post_type' => 'schedule',
+    'posts_per_page' => -1,
+    'meta_query' => [
+        [
+            'key' => 'ssc_date',
+            'value' => [
+                date('Y-m-d', $start),
+                date('Y-m-d', $end)
             ],
-        ],
+            'compare' => 'BETWEEN',
+            'type' => 'DATE'
+        ]
+    ]
     ];
 
     if ( !empty( $fields ) ) {
@@ -103,8 +105,7 @@ function ssc_render_calendar( $year, $month, $categories = [], $fields = [] ) {
                         echo '<img 
             src="' . esc_url( $image_url ) . '" 
             alt="' . esc_attr( $p->post_title ) . '" 
-            class="ssc-item-image"
-        >';
+            class="ssc-item-image"><span class="ssc-ttl">'. esc_attr( $p->post_title ) .'</span>';
                     } else {
                         echo '<span class="ssc-item-title">' . esc_html( $p->post_title ) . '</span>';
                     }

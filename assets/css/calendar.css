@@ -1,11 +1,15 @@
-.ssc-calendar {
+.ssc-calendar,
+.entry-content .ssc-calendar {
   width: 100%;
   border-collapse: collapse;
    line-height: 1.4;
+    margin: 1rem auto;
+    
 }
 
 .ssc-month-nav{
     text-align-last: center;
+    padding: 0.5rem 0;
 }
 .ssc-month-nav a{
     display: inline-block;
@@ -87,17 +91,77 @@ body .ssc-calendar td{
   position: relative;
   background: #fff;
   max-width: 600px;
-  margin: 10vh auto;
   padding: 20px;
+    min-height: 8rem;
+    margin: 50vh auto;
+    transform: translateY( -50%);
 }
 .ssc-modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-   width: 2rem;
-   height: 2rem;
-   font-size: 2rem;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 2rem;
+    height: 2rem;
+    font-size: 2rem;
+    line-height: 2rem;
 }
 #ssc-modal h3{
    margin: 0;
+    font-size: 1.15em;
 }
+
+
+
+
+/* 閉じるボタン（もし使う場合） */
+.my-calendar-modal__close,
+.my-calendar-modal button.close,
+.my-calendar-modal .close {
+    position: absolute !important;
+    top: 10px !important;
+    right: 14px !important;
+    background: none !important;
+    border: none !important;
+    font-size: 24px !important;
+    cursor: pointer !important;
+    color: #333 !important;
+}
+.popup {
+    display: none;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+	z-index: 3;
+    top: 0;
+    left: 0;
+	background: rgba(0,0,0,0.70);
+}
+
+.popup .content{
+	position: fixed;
+	padding: 3% 3% 8em;
+	font-size: 1rem;
+	border-radius: 4px;
+	border: 2px solid rgba(18,32,179,1.00);
+background: #fff;
+	top: 50%;
+	left: 50%;
+	transform: translate( -50%,-50%);
+	width: 90%;
+	margin: 3vh auto 10vh;
+	height: 70vh;
+	overflow-y: scroll;
+
+}
+	.popup .content ul{
+		font-size: 1rem;
+		margin-left: 1.0rem;
+		line-height: 1.5rem;
+	}
+	.popup .content ul li{
+		font-size: 1rem;
+	}	
+	.btn_close{
+		text-align: center;
+		padding: 0.3em;
+	}
