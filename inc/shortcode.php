@@ -28,13 +28,7 @@ add_shortcode('schedule_calendar', function ($atts) {
 
   // 使用フィールド（ssc_field）変換マップ
   $field_map = [
-    'base_ub' => 'base_ub',
-    'base_b'  => 'base_b',
-    'base_u'  => 'base_u',
-    'met_lr'  => 'met_lr',
-    'met_l'   => 'met_l',
-    'met_r'   => 'met_r',
-    'base_met'=> 'base_met',
+    'stadium' => 'stadium',
   ];
 
   $fields = [];
