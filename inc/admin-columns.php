@@ -70,6 +70,34 @@ case 'ssc_field':
 
 }, 10, 2 );
 
+/**
+ * クイック編集・通常編集 保存処理
+ */
+add_action('save_post', function($post_id){
+
+    // 自動保存・権限チェック
+    if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) return;
+    if ( ! current_user_can('edit_post', $post_id) ) return;
+
+    // 対象ポストタイプ限定
+    if ( get_post_type($post_id) !== 'schedule' ) return;
+
+    // 日付
+    if ( isset($_POST['ssc_date']) ) {
+        update_post_meta($post_id, 'ssc_date', sanitize_text_field($_POST['ssc_date']));
+    }
+
+    // 時間帯
+    if ( isset($_POST['ssc_time_slot']) ) {
+        update_post_meta($post_id, 'ssc_time_slot', sanitize_text_field($_POST['ssc_time_slot']));
+    }
+
+    // フィールド
+    if ( isset($_POST['ssc_field']) ) {
+        update_post_meta($post_id, 'ssc_field', sanitize_text_field($_POST['ssc_field']));
+    }
+
+});
 
 /**
  * ソート可能（任意）
@@ -77,4 +105,28 @@ case 'ssc_field':
 add_filter( 'manage_edit-schedule_sortable_columns', function ( $columns ) {
     $columns['ssc_date'] = 'ssc_date';
     return $columns;
+});
+
+/**
+ * カスタムフィールドでソート対応
+ */
+add_action('pre_get_posts', function($query){
+
+    if ( !is_admin() ) return;
+    if ( !$query->is_main_query() ) return;
+
+    if ( $query->get('post_type') === 'schedule' ) {
+
+        if ( $query->get('orderby') === 'ssc_date' ) {
+
+            $query->set('meta_key', 'ssc_date');
+
+            // 日付形式によって変える
+            $query->set('orderby', 'meta_value');
+
+            // 数値日付（YYYYMMDD）の場合はこっち
+            // $query->set('orderby', 'meta_value_num');
+        }
+    }
+
 });
