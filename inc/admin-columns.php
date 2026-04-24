@@ -1,4 +1,4 @@
-<?php
+<?php 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
@@ -37,7 +37,7 @@ add_filter( 'manage_schedule_posts_columns', function ( $columns ) {
 
 /**
  * ==================================================
- * カラム表示
+ * カラム表示（data属性付き）
  * ==================================================
  */
 add_action( 'manage_schedule_posts_custom_column', function ( $column, $post_id ) {
@@ -65,19 +65,98 @@ add_action( 'manage_schedule_posts_custom_column', function ( $column, $post_id 
             return;
 
         case 'ssc_date':
-            echo ssc_get_meta( $post_id, 'ssc_date' );
+            $val = get_post_meta($post_id, 'ssc_date', true);
+            echo '<span class="ssc-date" data-value="'.esc_attr($val).'">'.esc_html($val ?: '—').'</span>';
             return;
 
-        case 'ssc_time':
-            echo ssc_get_meta( $post_id, 'ssc_time_slot' );
-            return;
+case 'ssc_time':
 
-        case 'ssc_field':
-            echo ssc_get_meta( $post_id, 'ssc_field' );
-            return;
+    $val = get_post_meta($post_id, 'ssc_time_slot', true);
+    $map = ssc_get_time_slots();
+
+    echo isset($map[$val]) ? $map[$val] : '—';
+    return;
+
+
+case 'ssc_field':
+
+    $val = get_post_meta($post_id, 'ssc_field', true);
+    $map = ssc_get_fields();
+
+    echo isset($map[$val]) ? $map[$val] : '—';
+    return;
     }
 
 }, 10, 2 );
+
+/**
+ * ==================================================
+ * クイック編集UI
+ * ==================================================
+ */
+add_action('quick_edit_custom_box', function($column_name, $post_type){
+
+    if ($post_type !== 'schedule') return;
+
+    if ($column_name === 'ssc_date') {
+        ?>
+        <fieldset class="inline-edit-col-right">
+            <div class="inline-edit-col">
+                <label>
+                    <span class="title">日付</span>
+                    <input type="date" name="ssc_date">
+                </label>
+            </div>
+        </fieldset>
+        <?php
+    }
+
+
+}, 10, 2);
+
+/**
+ * ==================================================
+ * クイック編集：値セットJS（超重要）
+ * ==================================================
+ */
+add_action('admin_footer-edit.php', function(){
+
+    global $post_type;
+    if ($post_type !== 'schedule') return;
+?>
+<script>
+jQuery(function($){
+
+    const $wp_inline_edit = inlineEditPost.edit;
+
+    inlineEditPost.edit = function(id){
+        $wp_inline_edit.apply(this, arguments);
+
+        let post_id = 0;
+
+        if (typeof(id) === 'object') {
+            post_id = parseInt(this.getId(id));
+        }
+
+        if (post_id > 0) {
+
+            const $row = $('#post-' + post_id);
+            const $edit = $('#edit-' + post_id);
+
+            const date  = $row.find('.ssc-date').data('value');
+            const time  = $row.find('.ssc-time').data('value');
+            const field = $row.find('.ssc-field').data('value');
+
+            $edit.find('input[name="ssc_date"]').val(date);
+            $edit.find('select[name="ssc_time_slot"]').val(time);
+            $edit.find('select[name="ssc_field"]').val(field);
+        }
+    };
+
+});
+</script>
+<?php
+});
 
 /**
  * ==================================================
@@ -91,7 +170,7 @@ add_filter( 'manage_edit-schedule_sortable_columns', function ( $columns ) {
 
 /**
  * ==================================================
- * 保存処理（※今回は維持）
+ * 保存処理
  * ==================================================
  */
 add_action('save_post', function($post_id){
@@ -107,7 +186,7 @@ add_action('save_post', function($post_id){
     if ( isset($_POST['ssc_time_slot']) ) {
         update_post_meta($post_id, 'ssc_time_slot', sanitize_text_field($_POST['ssc_time_slot']));
     }
-
+    
     if ( isset($_POST['ssc_field']) ) {
         update_post_meta($post_id, 'ssc_field', sanitize_text_field($_POST['ssc_field']));
     }
@@ -116,7 +195,7 @@ add_action('save_post', function($post_id){
 
 /**
  * ==================================================
- * ソート処理（重要）
+ * ソート処理
  * ==================================================
  */
 add_action('pre_get_posts', function($query){
@@ -128,9 +207,6 @@ add_action('pre_get_posts', function($query){
 
         $query->set('meta_key', 'ssc_date');
         $query->set('orderby', 'meta_value');
-
-        // 数値日付ならこっち
-        // $query->set('orderby', 'meta_value_num');
     }
 
 });

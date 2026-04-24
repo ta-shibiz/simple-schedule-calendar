@@ -17,9 +17,39 @@ add_action('admin_init', function () {
 function ssc_default_fields() {
   return [
       
-    'stadium' => [
-      'label' => 'SATDIUM',
+    'base_ub' => [
+      'label' => 'BASE（全面）',
       'order' => 10,
+      'enabled' => true,
+    ],
+    'base_u' => [
+      'label' => 'BASE Uフィールド（片面）',
+      'order' => 20,
+      'enabled' => true,
+    ],
+    'base_b' => [
+      'label' => 'BASE Bフィールド（片面）',
+      'order' => 30,
+      'enabled' => true,
+    ],
+    'met_lr' => [
+      'label' => 'MET（全面）',
+      'order' => 40,
+      'enabled' => true,
+    ],
+    'met_l' => [
+      'label' => 'MET Lフィールド（片面）',
+      'order' => 50,
+      'enabled' => true,
+    ],
+    'met_r' => [
+      'label' => 'MET Rフィールド（片面）',
+      'order' => 50,
+      'enabled' => true,
+    ],
+    'base_met' => [
+      'label' => 'BASE×MET',
+      'order' => 60,
       'enabled' => true,
     ],
 

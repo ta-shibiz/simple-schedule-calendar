@@ -20,9 +20,6 @@ add_action('init', function () {
     'rewrite' => false,
     'query_var' => false,
     'show_in_rest' => true,
-    'capability_type' => 'post',
-    'map_meta_cap' => true,      
-      
   ]);
 
 });

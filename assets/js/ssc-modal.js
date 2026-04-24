@@ -9,6 +9,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.ssc-item').forEach(item => {
     item.addEventListener('click', () => {
+
+      // =========================
+      // ★リンク分岐（追加）
+      // =========================
+      const link = item.dataset.link;
+
+      if (link) {
+        window.location.href = link;
+        return;
+      }
+
+      // =========================
+      // 通常モーダル
+      // =========================
       titleEl.innerHTML = item.dataset.title;
       bodyEl.innerHTML  = item.dataset.body;
 
