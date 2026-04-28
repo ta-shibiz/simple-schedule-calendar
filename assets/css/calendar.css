@@ -180,4 +180,14 @@ background: #fff;
 		padding: 0.3em;
 	}
 
+body .ssc-calendar th,
+body .ssc-calendar td > div{
+    line-height: 1.2;
+}
+@media screen and (max-width: 575.98px) {
+.ssc-switch-wrapper{
+    margin-left: -1rem;
+    margin-right: -1rem;
+}
 
+}
