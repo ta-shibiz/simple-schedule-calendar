@@ -63,6 +63,11 @@ body .ssc-calendar td{
    cursor: pointer;
 
 }
+.ssc-item-image{
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
 
 .sc-month-nav {
   display: flex;
@@ -124,7 +129,6 @@ body .ssc-calendar td{
     z-index: 11;
     text-decoration: none !important;
 }
-
 
 
 /* 閉じるボタン（もし使う場合） */

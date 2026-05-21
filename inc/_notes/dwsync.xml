@@ -1,25 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="meta-boxes.php" server="150.60.158.230" local="134171712286970332" remote="134171712000000000" Dst="0" />
-<file name="admin-quick-edit.php" server="150.60.158.230" local="134172338190766761" remote="134172337800000000" Dst="0" />
-<file name="settings-page.php" server="150.60.158.230" local="134171705031398029" remote="134172350400000000" Dst="0" />
-<file name="admin-columns.php" server="150.60.158.230" local="134172392796762653" remote="134172392400000000" Dst="0" />
-<file name="admin-columns.php" server="sv14992.xserver.jp/union-base.com/" local="134172392796762653" remote="134172415800000000" Dst="0" />
-<file name="category-meta.php" server="sv14992.xserver.jp/union-base.com/" local="134164706146199111" remote="134172415800000000" Dst="0" />
-<file name="meta-boxes.php" server="sv14992.xserver.jp/union-base.com/" local="134171712286970332" remote="134172415800000000" Dst="0" />
-<file name="admin-quick-edit.php" server="sv14992.xserver.jp/union-base.com/" local="134172338190766761" remote="134172415800000000" Dst="0" />
-<file name="calendar-render.php" server="sv14992.xserver.jp/union-base.com/" local="134172752789442216" remote="134187961800000000" Dst="0" />
-<file name="post-type.php" server="sv14992.xserver.jp/union-base.com/" local="134164706146219117" remote="134172415800000000" Dst="0" />
-<file name="save-meta.php" server="sv14992.xserver.jp/union-base.com/" local="134164706146229890" remote="134172415800000000" Dst="0" />
-<file name="settings-page.php" server="sv14992.xserver.jp/union-base.com/" local="134171705031398029" remote="134172415800000000" Dst="0" />
-<file name="shortcode.php" server="sv14992.xserver.jp/union-base.com/" local="134172597854701528" remote="134187961800000000" Dst="0" />
-<file name="admin-columns.php" server="sv14992.xserver.jp" local="134193604733000905" remote="134193605400000000" Dst="0" />
-<file name="calendar-render.php" server="sv14992.xserver.jp" local="134193604733010913" remote="134193605400000000" Dst="0" />
-<file name="meta-boxes.php" server="sv14992.xserver.jp" local="134193607247329010" remote="134193607200000000" Dst="0" />
-<file name="admin-quick-edit.php" server="sv14992.xserver.jp" local="134193604733010913" remote="134193605400000000" Dst="0" />
-<file name="post-type.php" server="sv14992.xserver.jp" local="134193612916341922" remote="134193612600000000" Dst="0" />
-<file name="category-meta.php" server="sv14992.xserver.jp" local="134193604733020915" remote="134193605400000000" Dst="0" />
-<file name="save-meta.php" server="sv14992.xserver.jp" local="134193604733050950" remote="134193605400000000" Dst="0" />
-<file name="settings-page.php" server="sv14992.xserver.jp" local="134193607816893780" remote="134193607800000000" Dst="0" />
-<file name="shortcode.php" server="sv14992.xserver.jp" local="134193608088006325" remote="134193607800000000" Dst="0" />
+<file name="post-type.php" server="162.43.101.193" local="134218183477426240" remote="134138767200000000" Dst="0" />
+<file name="category-meta.php" server="162.43.101.193" local="134218183474751180" remote="134140440000000000" Dst="0" />
+<file name="calendar-render.php" server="162.43.101.193" local="134218183478803167" remote="134194737000000000" Dst="0" />
+<file name="post-type.php" server="150.60.159.50" local="134137507345971827" remote="134137507200000000" Dst="0" />
+<file name="settings-page.php" server="162.43.101.193" local="134218183481598838" remote="134138767200000000" Dst="0" />
+<file name="meta-boxes.php" server="162.43.101.193" local="134218183475761819" remote="134138767200000000" Dst="0" />
+<file name="shortcode.php" server="162.43.101.193" local="134218183482005602" remote="134196514200000000" Dst="0" />
+<file name="save-meta.php" server="162.43.101.193" local="134218183478297984" remote="134138767200000000" Dst="0" />
+<file name="admin-columns.php" server="162.43.101.193" local="134218170918847911" remote="134218218600000000" Dst="0" />
 </dwsync>
