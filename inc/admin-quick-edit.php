@@ -17,8 +17,10 @@ add_action( 'quick_edit_custom_box', function( $column, $post_type ) {
     if ( $column !== 'ssc_date' ) return;
 
     $printed = true;
+    $default_field = function_exists( 'ssc_get_default_field' ) ? ssc_get_default_field() : '';
     ?>
     <fieldset class="inline-edit-col-right ssc-quickedit-wrap">
+        <?php wp_nonce_field( 'ssc_quick_edit', 'ssc_quick_edit_nonce' ); ?>
         <div class="inline-edit-col">
             <div class="ssc-quickedit-grid">
 
@@ -49,9 +51,9 @@ add_action( 'quick_edit_custom_box', function( $column, $post_type ) {
                     <label>
                         <span class="title">使用フィールド</span>
                         <select name="ssc_field">
-                            <option value="">---</option>
+                            <option value="" <?php selected( $default_field, '' ); ?>>---</option>
                             <?php foreach ( ssc_get_fields() as $key => $label ) : ?>
-                                <option value="<?php echo esc_attr( $key ); ?>">
+                                <option value="<?php echo esc_attr( $key ); ?>" <?php selected( $default_field, $key ); ?>>
                                     <?php echo esc_html( $label ); ?>
                                 </option>
                             <?php endforeach; ?>
@@ -119,6 +121,7 @@ add_action( 'admin_footer-edit.php', function() {
 
     global $post_type;
     if ( $post_type !== 'schedule' ) return;
+    $default_field = function_exists( 'ssc_get_default_field' ) ? ssc_get_default_field() : '';
     ?>
     <script>
     jQuery(function($){
@@ -132,6 +135,8 @@ add_action( 'admin_footer-edit.php', function() {
 
             if (typeof(id) === 'object') {
                 postId = parseInt(this.getId(id), 10);
+            } else {
+                postId = parseInt(id, 10);
             }
 
             if (!postId) return;
@@ -139,9 +144,9 @@ add_action( 'admin_footer-edit.php', function() {
             const $row  = $('#post-' + postId);
             const $edit = $('#edit-' + postId);
 
-            const date  = $row.find('.ssc-date').data('value') || '';
-            const time  = $row.find('.ssc-time').data('value') || '';
-            const field = $row.find('.ssc-field').data('value') || '';
+            const date  = String($row.find('.ssc-date').attr('data-value') || '');
+            const time  = String($row.find('.ssc-time').attr('data-value') || '');
+            const field = String($row.find('.ssc-field').attr('data-value') || <?php echo wp_json_encode( $default_field ); ?>);
 
             $edit.find('input[name="ssc_date"]').val(date);
             $edit.find('select[name="ssc_time_slot"]').val(time);
@@ -162,19 +167,25 @@ add_action( 'admin_footer-edit.php', function() {
 add_action( 'save_post', function( $post_id ) {
 
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+    if ( ! isset( $_POST['_inline_edit'] ) ) return;
+    if ( ! isset( $_POST['ssc_quick_edit_nonce'] ) ) return;
+    if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['ssc_quick_edit_nonce'] ) ), 'ssc_quick_edit' ) ) return;
     if ( ! current_user_can( 'edit_post', $post_id ) ) return;
     if ( get_post_type( $post_id ) !== 'schedule' ) return;
 
-    if ( isset( $_POST['ssc_date'] ) ) {
-        update_post_meta( $post_id, 'ssc_date', sanitize_text_field( $_POST['ssc_date'] ) );
-    }
+    foreach ( [ 'ssc_date', 'ssc_time_slot', 'ssc_field' ] as $key ) {
+        $value = isset( $_POST[ $key ] )
+            ? sanitize_text_field( wp_unslash( $_POST[ $key ] ) )
+            : '';
 
-    if ( isset( $_POST['ssc_time_slot'] ) ) {
-        update_post_meta( $post_id, 'ssc_time_slot', sanitize_text_field( $_POST['ssc_time_slot'] ) );
-    }
+        if ( $key === 'ssc_field' && $value === '' && function_exists( 'ssc_get_default_field' ) ) {
+            $value = ssc_get_default_field();
+        }
 
-    if ( isset( $_POST['ssc_field'] ) ) {
-        update_post_meta( $post_id, 'ssc_field', sanitize_text_field( $_POST['ssc_field'] ) );
+        // クイック編集で値を取得できなかった場合は既存値を保持する。
+        if ( $value === '' ) continue;
+
+        update_post_meta( $post_id, $key, $value );
     }
 
 }, 10 );

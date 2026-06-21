@@ -9,4 +9,14 @@
 <file name="shortcode.php" server="162.43.101.193" local="134218183482005602" remote="134196514200000000" Dst="0" />
 <file name="save-meta.php" server="162.43.101.193" local="134218183478297984" remote="134138767200000000" Dst="0" />
 <file name="admin-columns.php" server="162.43.101.193" local="134218170918847911" remote="134218218600000000" Dst="0" />
+<file name="admin-columns.php" server="sv14992.xserver.jp" local="134265036956367237" remote="134265044400000000" Dst="0" />
+<file name="admin-quick-edit.php" server="sv14992.xserver.jp" local="134265038765056198" remote="134265044400000000" Dst="0" />
+<file name="calendar-render.php" server="sv14992.xserver.jp" local="134264803978056482" remote="134264806200000000" Dst="0" />
+<file name="category-meta.php" server="sv14992.xserver.jp" local="134264803978066483" remote="134264806200000000" Dst="0" />
+<file name="meta-boxes.php" server="sv14992.xserver.jp" local="134265038775608714" remote="134265044400000000" Dst="0" />
+<file name="post-type.php" server="sv14992.xserver.jp" local="134264803978116496" remote="134264806200000000" Dst="0" />
+<file name="save-meta.php" server="sv14992.xserver.jp" local="134265038785190782" remote="134265044400000000" Dst="0" />
+<file name="settings-page.php" server="sv14992.xserver.jp" local="134264803978146501" remote="134264806200000000" Dst="0" />
+<file name="shortcode.php" server="sv14992.xserver.jp" local="134264803978156518" remote="134264806200000000" Dst="0" />
+<file name="ssc-config.php" server="sv14992.xserver.jp" local="134264803978166472" remote="134264806200000000" Dst="0" />
 </dwsync>

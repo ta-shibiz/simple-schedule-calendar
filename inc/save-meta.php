@@ -11,10 +11,22 @@ add_action('save_post_schedule', function ($post_id) {
   foreach ($keys as $key) {
 
     if (!isset($_POST[$key])) {
+      if ($key === 'ssc_field' && function_exists('ssc_get_default_field')) {
+        $default_field = ssc_get_default_field();
+
+        if ($default_field !== '') {
+          update_post_meta($post_id, $key, $default_field);
+        }
+      }
+
       continue;
     }
 
-    $value = sanitize_text_field($_POST[$key]);
+    $value = sanitize_text_field(wp_unslash($_POST[$key]));
+
+    if ($key === 'ssc_field' && $value === '' && function_exists('ssc_get_default_field')) {
+      $value = ssc_get_default_field();
+    }
 
     // 🔒 空文字は保存しない（特に select 用）
     if ($value === '') {

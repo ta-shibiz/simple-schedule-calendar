@@ -65,15 +65,18 @@ add_action( 'manage_schedule_posts_custom_column', function ( $column, $post_id 
             return;
 
         case 'ssc_date':
-            echo ssc_get_meta( $post_id, 'ssc_date' );
+            $value = get_post_meta( $post_id, 'ssc_date', true );
+            echo '<span class="ssc-date" data-value="' . esc_attr( $value ) . '">' . ssc_get_meta( $post_id, 'ssc_date' ) . '</span>';
             return;
 
         case 'ssc_time':
-            echo ssc_get_meta( $post_id, 'ssc_time_slot' );
+            $value = get_post_meta( $post_id, 'ssc_time_slot', true );
+            echo '<span class="ssc-time" data-value="' . esc_attr( $value ) . '">' . ssc_get_meta( $post_id, 'ssc_time_slot' ) . '</span>';
             return;
 
         case 'ssc_field':
-            echo ssc_get_meta( $post_id, 'ssc_field' );
+            $value = get_post_meta( $post_id, 'ssc_field', true );
+            echo '<span class="ssc-field" data-value="' . esc_attr( $value ) . '">' . ssc_get_meta( $post_id, 'ssc_field' ) . '</span>';
             return;
     }
 
@@ -87,31 +90,6 @@ add_action( 'manage_schedule_posts_custom_column', function ( $column, $post_id 
 add_filter( 'manage_edit-schedule_sortable_columns', function ( $columns ) {
     $columns['ssc_date'] = 'ssc_date';
     return $columns;
-});
-
-/**
- * ==================================================
- * 保存処理（※今回は維持）
- * ==================================================
- */
-add_action('save_post', function($post_id){
-
-    if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) return;
-    if ( ! current_user_can('edit_post', $post_id) ) return;
-    if ( get_post_type($post_id) !== 'schedule' ) return;
-
-    if ( isset($_POST['ssc_date']) ) {
-        update_post_meta($post_id, 'ssc_date', sanitize_text_field($_POST['ssc_date']));
-    }
-
-    if ( isset($_POST['ssc_time_slot']) ) {
-        update_post_meta($post_id, 'ssc_time_slot', sanitize_text_field($_POST['ssc_time_slot']));
-    }
-
-    if ( isset($_POST['ssc_field']) ) {
-        update_post_meta($post_id, 'ssc_field', sanitize_text_field($_POST['ssc_field']));
-    }
-
 });
 
 /**

@@ -27,6 +27,9 @@ function ssc_render_meta_box( $post ) {
     $date  = get_post_meta( $post->ID, 'ssc_date', true );
     $slot  = get_post_meta( $post->ID, 'ssc_time_slot', true );
     $field = get_post_meta( $post->ID, 'ssc_field', true );
+    if ( $field === '' && function_exists( 'ssc_get_default_field' ) ) {
+        $field = ssc_get_default_field();
+    }
     $url   = get_post_meta( $post->ID, 'ssc_url', true );
     $body  = get_post_meta( $post->ID, 'ssc_body', true );
 
@@ -96,8 +99,16 @@ add_action( 'save_post', function ( $post_id ) {
         update_post_meta( $post_id, 'ssc_time_slot', sanitize_text_field( $_POST['ssc_time_slot'] ) );
     }
 
-    if ( isset( $_POST['ssc_field'] ) ) {
-        update_post_meta( $post_id, 'ssc_field', sanitize_text_field( $_POST['ssc_field'] ) );
+    $field_value = isset( $_POST['ssc_field'] )
+        ? sanitize_text_field( wp_unslash( $_POST['ssc_field'] ) )
+        : '';
+
+    if ( $field_value === '' && function_exists( 'ssc_get_default_field' ) ) {
+        $field_value = ssc_get_default_field();
+    }
+
+    if ( $field_value !== '' || isset( $_POST['ssc_field'] ) ) {
+        update_post_meta( $post_id, 'ssc_field', $field_value );
     }
 
     if ( isset( $_POST['ssc_body'] ) ) {
