@@ -12,3 +12,19 @@ function ssc_get_fields() {
         'base_met'=> 'BASE×MET',
     ];
 }
+
+/** Return the sole configured field key as the default. */
+function ssc_get_default_field() {
+    $fields = ssc_get_fields();
+
+    if ( count( $fields ) !== 1 ) {
+        return '';
+    }
+
+    foreach ( $fields as $key => $label ) {
+        return (string) $key;
+    }
+
+    return '';
+}
+
