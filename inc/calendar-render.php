@@ -124,6 +124,33 @@ function ssc_render_calendar( $year, $month, $categories = [], $fields = [] ) {
     }
 
     /**
+     * ▼ 時間帯順に並び替え
+     */
+    $slot_order = array_keys( ssc_get_time_slots() );
+
+    foreach ( $map as $date => $day_posts ) {
+
+        $sorted_posts = [];
+        $fallback_posts = [];
+
+        foreach ( $slot_order as $slot ) {
+            foreach ( $day_posts as $post ) {
+                if ( get_post_meta( $post->ID, 'ssc_time_slot', true ) === $slot ) {
+                    $sorted_posts[] = $post;
+                }
+            }
+        }
+
+        foreach ( $day_posts as $post ) {
+            if ( ! in_array( get_post_meta( $post->ID, 'ssc_time_slot', true ), $slot_order, true ) ) {
+                $fallback_posts[] = $post;
+            }
+        }
+
+        $map[ $date ] = array_merge( $sorted_posts, $fallback_posts );
+    }
+
+    /**
      * ▼ カレンダー出力
      */
     echo '<table class="ssc-calendar">';
